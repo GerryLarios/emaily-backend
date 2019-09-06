@@ -11,11 +11,20 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const keys = require('./config/key')
+
+const handleToken = (accessToken, refreshToken, profile, done) => {
+    console.log('Access token', accessToken);
+    console.log('Refresh Token', refreshToken);
+    console.log('Profile', profile);
+}
+
 passport.use(new GoogleStrategy({
     clientID: keys.googleClientID,
     clientSecret: keys.googleClientSecret,
     callbackURL: '/auth/google/callback'
-}, (accessToken) => console.log(accessToken)))
+}, handleToken))
+
+
 
 // mongoose.Promise = global.Promise
 // mongoose.connect('mongodb://127.0.0.1:27017/emaily_test', { useNewUrlParser: true })
@@ -40,5 +49,7 @@ app.use('/users', usersRouter);
 app.get('/auth/google', passport.authenticate('google', {
     scope: ['profile', 'email']
 }))
+
+app.get('/auth/google/callback', passport.authenticate('google'))
 
 module.exports = app;
