@@ -1,21 +1,12 @@
 const express = require('express');
-const mongoose = require('mongoose');
-// const passport = require('passport');
-// const GoogleStrategy = require('passport-google-oauth20').Strategy
+require('./services/connection')
+require('./model/User');
 require('./services/passport');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-
-// mongoose.Promise = global.Promise
-// mongoose.connect('mongodb://127.0.0.1:27017/emaily_test', { useNewUrlParser: true })
-
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'Connection Error'));
-// db.once('open', () => console.log('Successfully Connected'));
-
 const app = express();
 require('./routes/auth')(app);
 
