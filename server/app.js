@@ -1,9 +1,11 @@
 const express = require('express');
-const cookieSession = require('cookie-session');
 const passport = require('passport');
+const proxy = require('http-proxy-middleware')
+
 require('./services/connection')
 require('./model/User');
 require('./services/passport');
+
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -15,6 +17,11 @@ const app = express();
 app.use(require('./services/cookie'))
 app.use(passport.initialize())
 app.use(passport.session())
+
+const proxyConf = proxy({ target: "http://localhost:4000", changeOrigin: true });
+app.use('/auth/google/callback', proxyConf)
+app.use('/auth/google', proxyConf)
+app.use('api/current_user', proxyConf)
 
 require('./routes/auth')(app);
 app.use(logger('dev'));
