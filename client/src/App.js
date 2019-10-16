@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <a href="http://localhost:4000/auth/google">Sign with google</a>
+        <a href="/auth/google">Sign with google</a>
       </header>
     </div>
   );
