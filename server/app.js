@@ -1,6 +1,5 @@
 const express = require('express');
 const passport = require('passport');
-const proxy = require('../client/node_modules/http-proxy-middleware');
 
 require('./services/connection')
 require('./model/User');
@@ -17,12 +16,6 @@ const app = express();
 app.use(require('./services/cookie'))
 app.use(passport.initialize())
 app.use(passport.session())
-
-const target = { target: "http://localhost:5000" }
-app.use(proxy('/auth/google', target))
-app.use(proxy('/auth/google/callback', target))
-app.use(proxy('/api/current_user', target))
-app.use(proxy('/api/**', target))
 
 require('./routes/auth')(app);
 app.use(logger('dev'));
