@@ -1,9 +1,10 @@
 const express = require('express');
-const cookieSession = require('cookie-session');
 const passport = require('passport');
+
 require('./services/connection')
 require('./model/User');
 require('./services/passport');
+
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
