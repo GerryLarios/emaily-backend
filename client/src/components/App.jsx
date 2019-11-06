@@ -8,7 +8,7 @@ const SurveyNew = () => <h2>SurveyNew</h2>
 const Landing = () => <h2>Landing</h2>
 
 export default () => (
-    <div>
+    <div className="container">
         <BrowserRouter>
             <div>
                 <Header/>
