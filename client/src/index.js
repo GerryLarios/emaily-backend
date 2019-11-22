@@ -1,20 +1,23 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
 
-import App from './components/App.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware }  from 'redux';
+import 'materialize-css/dist/css/materialize.min.css'
+import reduxThunk from 'redux-thunk';
 
-import Reducers from './reducers/index'
+import App from './components/App';
 
-const store = createStore(Reducers, {}, applyMiddleware())
+import Reducers from './reducers/index';
 
-ReactDom.render(
+const store = createStore(Reducers, {}, applyMiddleware(reduxThunk))
+
+ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <App /> 
     </Provider>,
     document.getElementById('root')
-)
+);
 
 console.log('STRIPE KEY IS:', process.env.REACT_APP_STRIPE_KEY);
 console.log('ENV', process.env.NODE_ENV)
